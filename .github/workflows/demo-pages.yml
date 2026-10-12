@@ -1,0 +1,44 @@
+name: Publish visual demo only
+on:
+  push:
+    branches: [refactor/remove-bling]
+    paths: ['demo/**', '.github/workflows/demo-pages.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: visual-demo-pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    # Only the independent public demo repository may publish this workflow.
+    if: github.repository == 'xJoyceDias/star-limp-demo' && github.ref == 'refs/heads/refactor/remove-bling'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: demo
+      - name: Reject unexpected files
+        shell: bash
+        run: |
+          test -f demo/index.html
+          test "$(find demo -type f | wc -l)" -eq 8
+          test -z "$(find demo -type l)"
+          for file in index.html demo.js demo.css v4.css icons.js favicon.svg README.md .nojekyll; do
+            test -f "demo/$file"
+          done
+          test -f demo/.nojekyll
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: demo
+      - id: deployment
+        uses: actions/deploy-pages@v4
