@@ -2517,10 +2517,10 @@ document.addEventListener("keydown", (event) => {
   }
 });
 window.addEventListener("hashchange", () => {
-  const target = location.hash.slice(2) || "dashboard";
+  const target = location.hash.replace(/^#\/?/, "") || "dashboard";
   if (target !== currentView) render(target);
 });
-render(location.hash.slice(2) || "dashboard");
+render(location.hash.replace(/^#\/?/, "") || "dashboard");
 
 const guarded = new WeakMap();
 function guardActions() {
