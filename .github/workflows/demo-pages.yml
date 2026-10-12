@@ -30,9 +30,9 @@ jobs:
         shell: bash
         run: |
           test -f demo/index.html
-          test "$(find demo -type f | wc -l)" -eq 8
+          test "$(find demo -type f | wc -l)" -eq 21
           test -z "$(find demo -type l)"
-          for file in index.html demo.js demo.css v4.css icons.js favicon.svg README.md .nojekyll; do
+          for file in index.html demo.js demo.css styles.css entradas.css pdv-layout.css identity.css icons.js favicon.svg README.md .nojekyll demo-data.js demo-safety.js entradas-demo.js fonts.css fonts/bricolage-latin-1.woff2 fonts/bricolage-latin-ext-0.woff2 fonts/bricolage-OFL.txt fonts/hanken-latin-3.woff2 fonts/hanken-latin-ext-2.woff2 fonts/hanken-OFL.txt; do
             test -f "demo/$file"
           done
           test -f demo/.nojekyll

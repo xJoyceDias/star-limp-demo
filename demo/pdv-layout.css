@@ -1,0 +1,99 @@
+/* V4 PDV: navigation remains visible, and the workspace has two independent scroll areas. */
+.sidebar .nav-sale {
+  min-height: 46px;
+  margin: 2px 0 8px;
+  padding: 11px 12px;
+  border: 1px solid rgba(46, 155, 255, .25);
+  background: rgba(46, 155, 255, .08);
+  color: var(--txt);
+}
+.sidebar .nav-sale.active {
+  background: rgba(46, 155, 255, .2);
+  border-color: var(--blue);
+}
+.nav-sale .kbd { margin-left: auto; }
+.sale-mode .pdv { height: 100dvh; overflow: hidden; }
+.sale-mode .p-work { min-width: 0; min-height: 0; overflow: hidden; }
+.sale-mode .p-cat { min-width: 0; min-height: 0; }
+.sale-mode .p-searchwrap, .sale-mode .p-lhead, .sale-mode .p-tip { flex-shrink: 0; }
+.sale-mode .p-lines { min-width: 0; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+.sale-mode .p-cart { min-width: 0; min-height: 0; overflow: hidden; }
+.sale-mode .pk-head { flex: 0 0 auto; }
+.sale-mode .pk-head .pk-close { margin-left: auto; }
+.sale-mode .pk-foot {
+  flex: 1 1 0;
+  min-height: 0;
+  max-height: none;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 18px 20px;
+  scrollbar-gutter: stable;
+}
+.sale-mode .pk-bottom {
+  position: relative;
+  flex: 0 0 auto;
+  z-index: 2;
+  padding: 14px 20px calc(14px + env(safe-area-inset-bottom));
+  background: #080d19;
+}
+.sale-mode .pk-bottom .finalize { width: 100%; min-height: 56px; margin: 0; }
+.sale-mode .credit-client { padding: 16px; gap: 10px; }
+.sale-mode .withdrawn-label input { height: 44px; font-size: 14px; }
+.sale-mode #quick-client { min-height: 40px; font-size: 13px; }
+.sale-mode .selected-client { overflow-wrap: anywhere; }
+.sale-mode .disc-row label, .sale-mode .delivery-field, .sale-mode .cash-row label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+.sale-mode .disc-row input, .sale-mode .delivery-field input, .sale-mode .cash-row input {
+  flex: 0 1 45%;
+  width: 45%;
+  max-width: 180px;
+  min-width: 0;
+  height: 42px;
+}
+.sale-mode .pay-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 7px; }
+.sale-mode .pay { min-width: 0; min-height: 64px; }
+.sale-mode .p-search kbd { flex-shrink: 0; }
+
+@media (min-width: 1024px) {
+  .sale-mode .sidebar { display: flex; overflow-y: auto; }
+  .sale-mode .pdv { left: var(--sidebar); }
+  .sale-mode .p-work { grid-template-columns: minmax(0, 58fr) minmax(0, 42fr); }
+  .sale-mode .p-cat { padding: 18px 18px 0; }
+  .sale-mode .pl {
+    grid-template-columns: 28px minmax(0, 1fr) 108px 100px 28px;
+    gap: 10px;
+    padding: 14px 12px;
+  }
+  .sale-mode .pl-main b { overflow-wrap: anywhere; }
+  .sale-mode .pl-tot { min-width: 0; font-size: 18px; white-space: normal; overflow-wrap: anywhere; }
+  .sale-mode .qty { min-width: 0; }
+  .sale-mode .qty input { width: 36px; }
+  .sale-mode .qty button { width: 28px; height: 28px; }
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .sale-mode .pl {
+    grid-template-columns: 26px minmax(0, 1fr) 110px;
+    grid-template-areas: "n main rm" "n qty tot";
+    row-gap: 10px;
+  }
+  .sale-mode .pl .rm { justify-self: end; }
+  .sale-mode .pay { font-size: 10.5px; }
+}
+@media (max-width: 1023px) {
+  .sale-mode .pdv { left: 0; }
+  .sale-mode .p-work { grid-template-columns: minmax(0, 1fr); }
+  .sale-mode .pk-bottom { padding-bottom: calc(14px + env(safe-area-inset-bottom)); }
+  .sale-mode .p-title { min-width: 0; }
+  .sale-mode .p-search kbd { display: none; }
+}
+@media (max-width: 520px) {
+  .sale-mode .p-top { gap: 8px; }
+  .sale-mode .p-title { font-size: 18px; }
+  .sale-mode .pk-foot { padding: 16px; }
+  .sale-mode .pk-bottom { padding-left: 16px; padding-right: 16px; }
+}

@@ -2,6 +2,8 @@
 
 Interface de exemplo de vendas, estoque e gestão. A empresa, clientes, fornecedores, produtos e valores são fictícios.
 
+Esta versão reutiliza os templates, componentes, modais e os quatro estilos do front-end V4. As fontes Bricolage Grotesque e Hanken Grotesk são servidas localmente, com suas licenças. O JavaScript de apresentação usa uma fonte fictícia em memória; integrações de rede, documentos e dispositivos foram removidas.
+
 Esta demonstração não contém o sistema operacional da empresa, banco, APIs, credenciais ou documentos reais. O carrinho é uma simulação em memória; recarregar a página limpa os itens. Botões administrativos apenas abrem avisos. Não digite informações reais.
 
 ## Visualizar

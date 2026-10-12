@@ -1,5 +1,1329 @@
 <!doctype html>
-<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'"><meta name="theme-color" content="#05080f"><title>Empresa Demonstração · Interface V4</title><link rel="icon" href="./favicon.svg"><link rel="stylesheet" href="./v4.css"><link rel="stylesheet" href="./demo.css"></head><body>
-<div class="demo-banner">DEMONSTRAÇÃO VISUAL · Dados fictícios · Nenhuma operação real</div>
-<div class="app"><aside class="sidebar"><div class="brand"><div class="demo-mark">ED</div><div><b>Empresa<br>Demonstração</b><small>Vendas e estoque · exemplo</small></div></div><nav id="desktop-nav" aria-label="Menu"></nav><div class="side-user"><div class="demo-mark">ED</div><div><b>Ambiente demonstrativo</b><small>Somente simulação</small></div></div></aside><main class="main"><header class="mtop"><div class="demo-mark">ED</div><b>Empresa Demonstração</b><button class="btn" data-route="sale">Nova venda</button></header><div class="page"><header class="phead"><div><h1 id="title">Início</h1><p id="subtitle">Conheça a interface do seu negócio.</p></div><div class="ph-right"><button class="cmd-btn" data-demo>Buscar ação</button><div class="d-clock"><div class="time">10:30</div><div class="date">Horário ilustrativo</div></div><button class="quick-sale" data-route="sale"><span class="qs-ic"><i data-ic="plus"></i></span><span class="qs-tx"><b>Nova venda</b><small>Simular atendimento</small></span></button></div></header><div id="view"></div></div></main></div><nav id="mobile-nav" class="demo-mobile" aria-label="Navegação móvel"></nav>
-<dialog id="demo-dialog"><div class="dialog-head"><h2>Demonstração visual</h2><button id="close-dialog" aria-label="Fechar">×</button></div><p id="demo-message">Esta é uma demonstração visual. Nenhum dado real é salvo.</p><button class="btn" id="demo-ok">Entendi</button></dialog><script src="./icons.js"></script><script src="./demo.js"></script></body></html>
+<html lang="pt-BR">
+  <head><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; form-action 'none'; object-src 'none'; frame-src 'none'; base-uri 'none'">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Empresa Demonstração · PDV</title>
+
+
+    <meta name="theme-color" content="#05080f" />
+
+
+
+
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+
+
+
+    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./entradas.css" /><link rel="stylesheet" href="./pdv-layout.css" />
+    <link rel="stylesheet" href="./identity.css" />
+  <link rel="stylesheet" href="./fonts.css" /><link rel="stylesheet" href="./demo.css" /></head>
+  <body><div class="demo-banner" role="status">DEMONSTRAÇÃO VISUAL · Empresa e dados fictícios · Nenhuma operação real</div>
+    <div class="app">
+      <aside class="sidebar">
+        <div class="brand">
+          <span class="brand-icon"><img src="./favicon.svg" alt="Empresa Demonstração" width="64" height="64" /></span>
+          <div>
+            <b>Empresa Demonstração</b>
+            <small>Fragrâncias e Produtos</small>
+          </div>
+        </div>
+        <button class="nav nav-sale" data-view="sale"><i data-ic="plus"></i><span>Nova venda</span><kbd class="kbd">F2</kbd></button><div class="side-label">Visão geral</div>
+        <button class="nav" data-view="dashboard">
+          <i data-ic="home"> </i>
+          <span>Início</span>
+        </button>
+        <button class="nav" data-view="sales">
+          <i data-ic="receipt"> </i>
+          <span>Vendas</span>
+        </button>
+        <div class="side-label">Gestão comercial</div>
+        <button class="nav" data-view="clients">
+          <i data-ic="users"> </i>
+          <span>Clientes</span>
+        </button>
+        <button class="nav" data-view="receivables">
+          <i data-ic="wallet"> </i>
+          <span>Contas de clientes</span>
+        </button>
+        <button class="nav" data-view="entries">
+          <i data-ic="upload"></i
+          ><span
+            >Entradas<small>Notas e pedidos de entrada</small></span
+          ></button
+        ><button class="nav" data-view="products">
+          <i data-ic="box"> </i>
+          <span>Produtos</span>
+        </button>
+        <button class="nav" data-view="payables">
+          <i data-ic="bill"> </i>
+          <span>Contas a pagar</span>
+          <span class="badge" id="payables-badge"> </span>
+        </button>
+        <button class="nav" data-view="reports"><i data-ic="chart"></i><span>Relatórios</span></button><div class="side-user">
+          <span class="brand-icon"><img src="./favicon.svg" alt="Empresa Demonstração" width="64" height="64" /></span>
+          <div>
+            <b>Empresa Demonstração</b>
+            <small>
+              <i id="connection-dot"> </i>
+              <span id="connection-label">Conectando…</span>
+            </small>
+          </div>
+        </div>
+      </aside>
+      <main class="main">
+        <header class="mtop">
+          <span class="brand-icon"><img src="./favicon.svg" alt="Empresa Demonstração" width="64" height="64" /></span>
+          <div class="ttl">
+            <b id="mobile-title">Início</b>
+          </div>
+          <button class="quick-sale m" data-go="sale">
+            <span class="qs-ic">
+              <i data-ic="plus"> </i>
+            </span>
+            <span class="qs-tx">
+              <b>Nova venda</b>
+              <small>Acesso rápido ao balcão</small>
+            </span>
+            <kbd class="kbd">F2</kbd>
+          </button>
+        </header>
+        <div class="page">
+          <header class="phead">
+            <div class="heading-copy">
+              <h1 id="head-title">Início</h1>
+              <p id="home-greeting" hidden></p>
+              <p id="head-subtitle"></p>
+            </div>
+            <div class="ph-right">
+              <button class="cmd-btn" id="open-command">
+                <i data-ic="search"> </i>Buscar ação
+                <kbd class="kbd">Ctrl K</kbd>
+              </button>
+              <div class="d-clock">
+                <div class="time js-time"></div>
+                <div class="date js-date"></div>
+              </div>
+              <button class="quick-sale" data-go="sale">
+                <span class="qs-ic">
+                  <i data-ic="plus"> </i>
+                </span>
+                <span class="qs-tx">
+                  <b>Nova venda</b>
+                  <small>Acesso rápido ao balcão</small>
+                </span>
+                <kbd class="kbd">F2</kbd>
+              </button>
+            </div>
+          </header>
+          <div id="app" aria-live="polite"></div>
+        </div>
+      </main>
+      <nav class="tabs"><button class="tab" data-view="reports"><span class="pill"><i data-ic="chart"></i></span><span>Relatórios</span></button>
+        <button class="tab" data-view="dashboard">
+          <span class="pill">
+            <i data-ic="home"> </i>
+          </span>
+          <span>Início</span>
+        </button>
+        <button class="tab" data-view="sale"><span class="pill"><i data-ic="plus"></i></span><span>Nova venda</span></button><button class="tab" data-view="sales">
+          <span class="pill">
+            <i data-ic="receipt"> </i>
+          </span>
+          <span>Vendas</span>
+        </button>
+        <button class="tab" data-view="clients">
+          <span class="pill">
+            <i data-ic="users"> </i>
+          </span>
+          <span>Clientes</span>
+        </button>
+        <button class="tab" data-view="receivables">
+          <span class="pill">
+            <i data-ic="wallet"> </i>
+          </span>
+          <span>Contas de clientes</span>
+        </button>
+        <button class="tab" data-view="entries">
+          <span class="pill"><i data-ic="upload"></i></span
+          ><span>Entradas</span></button
+        ><button class="tab" data-view="products">
+          <span class="pill">
+            <i data-ic="box"> </i>
+          </span>
+          <span>Produtos</span>
+        </button>
+        <button class="tab" data-view="payables">
+          <span class="pill">
+            <i data-ic="bill"> </i>
+          </span>
+          <span>Contas a pagar</span>
+        </button>
+      </nav>
+    </div>
+    <div id="toast" class="toast" role="status"></div>
+    <template id="dashboard">
+      <section class="screen" data-screen="dashboard">
+        <div class="bento">
+          <div class="alerts" id="dashboard-alerts"></div>
+          <div class="shortcuts">
+            <button class="sc" data-shortcut="receivables">
+              <span
+                class="ico"
+                style="
+                  background: color-mix(in srgb, var(--teal) 15%, transparent);
+                  color: var(--teal);
+                "
+              >
+                <i data-ic="wallet"> </i>
+              </span>
+              <span>
+                <b>Receber de cliente</b>
+                <small>Baixar saldo devedor</small>
+              </span>
+            </button>
+            <button class="sc" data-shortcut="clients">
+              <span
+                class="ico"
+                style="
+                  background: color-mix(
+                    in srgb,
+                    var(--violet) 15%,
+                    transparent
+                  );
+                  color: var(--violet);
+                "
+              >
+                <i data-ic="userplus"> </i>
+              </span>
+              <span>
+                <b>Novo cliente</b>
+                <small>Cadastro rápido</small>
+              </span>
+            </button>
+            <button class="sc" data-shortcut="products">
+              <span
+                class="ico"
+                style="
+                  background: color-mix(in srgb, var(--amber) 15%, transparent);
+                  color: var(--amber);
+                "
+              >
+                <i data-ic="box"> </i>
+              </span>
+              <span>
+                <b>Novo produto</b>
+                <small>Preço e estoque</small>
+              </span>
+            </button>
+            <button class="sc" data-shortcut="payables">
+              <span
+                class="ico"
+                style="
+                  background: color-mix(in srgb, var(--red) 15%, transparent);
+                  color: var(--red);
+                "
+              >
+                <i data-ic="upload"> </i>
+              </span>
+              <span>
+                <b>Importar boleto</b>
+                <small>Contas a pagar</small>
+              </span>
+            </button>
+          </div>
+          <article class="card kpi k4 neon" style="--kc: var(--blue)">
+            <div class="k-label">
+              <i style="background: var(--blue)"> </i>Vendido hoje
+            </div>
+            <div class="k-value" id="today">—</div>
+            <div class="k-cap" id="today-caption"></div>
+          </article>
+          <article class="card kpi k4 neon" style="--kc: var(--teal)">
+            <div class="k-label">
+              <i style="background: var(--teal)"> </i>Vendido na semana
+            </div>
+            <div class="k-value" id="week">—</div>
+            <div class="k-cap" id="week-caption"></div>
+          </article>
+          <article class="card kpi k4 neon" style="--kc: var(--violet)">
+            <div class="k-label">
+              <i style="background: var(--violet)"> </i>Vendido no mês
+            </div>
+            <div class="k-value" id="month">—</div>
+            <div class="k-cap" id="month-caption"></div>
+          </article>
+          <article class="card kpi k4 neon" style="--kc: var(--amber)">
+            <div class="k-label">
+              <i style="background: var(--amber)"> </i>Contas a pagar
+            </div>
+            <div class="k-value" id="payables-total">—</div>
+            <div class="k-cap" id="payables-caption"></div>
+            <div id="payables-stack" class="stack"></div>
+            <div id="payables-legend" class="legend sm"></div>
+          </article>
+          <article class="card c8 full">
+            <header class="card-h">
+              <h3>Últimos 7 dias</h3>
+              <span>Total vendido por dia</span>
+            </header>
+            <div class="card-b">
+              <div id="sales-bars" class="bars"></div>
+            </div>
+          </article>
+          <article class="card c4 full">
+            <header class="card-h">
+              <h3>Formas de pagamento</h3>
+              <span>No mês</span>
+            </header>
+            <div class="card-b">
+              <div id="payments-stack" class="stack"></div>
+              <div id="payments-legend" class="legend"></div>
+            </div>
+          </article>
+          <article class="card c7 full">
+            <header class="card-h">
+              <h3>Últimas vendas</h3>
+              <button class="lnk" data-go="sales">Ver todas</button>
+            </header>
+            <div id="recent-sales" class="card-b mini-list"></div>
+          </article>
+          <article class="card c5 full">
+            <header class="card-h">
+              <h3>Próximos vencimentos</h3>
+              <button class="lnk" data-go="payables">Ver contas</button>
+            </header>
+            <div id="upcoming-payables" class="card-b mini-list"></div>
+          </article>
+        </div>
+      </section>
+    </template>
+    <template id="sales">
+      <section class="screen" data-screen="sales">
+        <div class="toolbar">
+          <label class="search">
+            <i data-ic="search"> </i>
+            <input
+              id="sales-search"
+              placeholder="Buscar por número ou cliente"
+              aria-label="Buscar por número ou cliente"
+              autocomplete="off"
+            />
+          </label>
+          <select class="sel" id="sales-period" aria-label="Período">
+            <option value="7">Últimos 7 dias</option>
+            <option value="1">Hoje</option>
+            <option value="30">Últimos 30 dias</option>
+            <option value="0">Todo o período</option>
+          </select>
+          <select class="sel" id="sales-status" aria-label="Status">
+            <option value="">Todos os status</option>
+            <option>CONCLUIDA</option>
+            <option>CANCELADA</option>
+          </select>
+          <button class="btn" id="print-sales-report">Relatório PDF</button
+          ><button class="btn" id="export-sales">
+            <i data-ic="file"> </i>Exportar CSV
+          </button>
+        </div>
+        <div class="chips" id="sales-chips"></div>
+        <div class="stats" id="sales-stats"></div>
+        <article class="card">
+          <header class="card-h">
+            <h3>Vendas por dia</h3>
+            <span id="sales-chart-caption"> </span>
+          </header>
+          <div class="card-b">
+            <div class="bars sm" id="sales-chart"></div>
+          </div>
+        </article>
+        <div class="tbl table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Nº</th>
+                <th>Data</th>
+                <th>Cliente</th>
+                <th>Pagamento</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="sales-rows"></tbody>
+          </table>
+          <p class="empty-row" id="empty-sales"></p>
+        </div>
+      </section>
+    </template>
+    <template id="clients">
+      <section class="screen" data-screen="clients">
+        <div class="stats" id="clients-stats"></div>
+        <div class="toolbar">
+          <label class="search">
+            <i data-ic="search"> </i>
+            <input
+              id="client-search"
+              placeholder="Buscar por nome, telefone ou documento"
+              aria-label="Buscar por nome, telefone ou documento"
+              autocomplete="off"
+            />
+          </label>
+          <select class="sel" id="client-sort" aria-label="Ordenação">
+            <option value="saldo">Maior saldo</option>
+            <option value="nome">Nome (A–Z)</option>
+          </select>
+          <button class="btn primary" id="new-client">
+            <i data-ic="userplus"> </i>Novo cliente
+          </button>
+        </div>
+        <div class="chips" id="client-chips"></div>
+        <div class="tbl table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Telefone</th>
+                <th>Saldo devedor</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="client-rows"></tbody>
+          </table>
+          <p class="empty-row" id="empty-clients"></p>
+        </div>
+      </section>
+    </template>
+    <template id="receivables">
+      <section class="screen" data-screen="receivables">
+        <div class="stats" id="receivable-stats"></div>
+        <div class="toolbar"><button class="btn" id="new-historical-credit">Lançar fiado antigo</button><button class="btn" id="historical-with-products">Compra antiga com produtos</button></div>
+        <div class="toolbar">
+          <label class="search">
+            <i data-ic="search"> </i>
+            <input
+              id="receivable-search"
+              placeholder="Buscar cliente com saldo devedor"
+              aria-label="Buscar cliente com saldo devedor"
+              autocomplete="off"
+            />
+          </label>
+        </div>
+        <div class="account-layout">
+          <article class="card">
+            <header class="card-h">
+              <h3>Registrar recebimento</h3>
+              <span>Total ou parcial</span>
+            </header>
+            <div class="card-b form-grid">
+              <label class="fg wide"
+                >Cliente<select class="in" id="receive-client">
+                  <option value="">Selecione um cliente</option>
+                </select>
+              </label>
+              <label class="fg"
+                >Valor recebido (R$)<input
+                  class="in"
+                  id="receive-value"
+                  type="number"
+                  min="0.01"
+                  step="0.01"
+                />
+              </label>
+              <label class="fg"
+                >Forma de recebimento<select class="in" id="receive-method">
+                  <option value="pix">Pix</option>
+                  <option value="dinheiro">Dinheiro</option>
+                  <option value="debito">Débito</option>
+                  <option value="credito">Crédito</option>
+                  <option value="transferencia">Transferência</option>
+                </select>
+              </label>
+              <label class="fg wide"
+                >Observação<input
+                  class="in"
+                  id="receive-note"
+                  placeholder="Opcional"
+                />
+              </label>
+              <button class="btn primary wide" id="save-receivable">
+                <i data-ic="check"> </i>Confirmar recebimento
+              </button>
+            </div>
+          </article>
+          <article id="customer-account" class="card" hidden>
+            <header class="card-h">
+              <h3 id="account-title">Conta do cliente</h3>
+            </header>
+            <div class="card-b">
+              <p id="account-info" class="note"></p>
+              <div class="table-scroll">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Data</th>
+                      <th>Compra / retirada</th>
+                      <th>Valor</th>
+                      <th>Em aberto</th>
+                    </tr>
+                  </thead>
+                  <tbody id="account-purchases"></tbody>
+                </table>
+              </div>
+              <h3 class="history-title">Histórico de recebimentos</h3>
+              <div id="account-payments" class="mini-list"></div>
+            </div>
+          </article>
+        </div>
+        <div class="tbl table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Cliente</th>
+                <th>Telefone</th>
+                <th>Saldo em aberto</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="receivable-rows"></tbody>
+          </table>
+          <p class="empty-row" id="empty-receivables"></p>
+        </div>
+      </section>
+    </template>
+    <template id="products">
+      <section class="screen" data-screen="products">
+        <div id="product-alerts"></div>
+        <div class="stats" id="products-stats"></div>
+        <div class="toolbar">
+          <label class="search">
+            <i data-ic="search"> </i>
+            <input
+              id="product-search"
+              placeholder="Buscar por descrição, código ou categoria"
+              aria-label="Buscar por descrição, código ou categoria"
+              autocomplete="off"
+            />
+          </label>
+          <select class="sel" id="product-sort" aria-label="Ordenação">
+            <option value="nome">Nome (A–Z)</option>
+            <option value="preco">Maior preço</option>
+            <option value="estoque">Menor estoque</option>
+          </select>
+          <div class="seg">
+            <button data-product-view="cards" class="on">Cards</button>
+            <button data-product-view="table">Tabela</button>
+          </div>
+          <button class="btn primary" id="new-product">
+            <i data-ic="plus"> </i>Novo produto
+          </button>
+        </div>
+        <div class="chips" id="product-chips"></div>
+        <div class="pgrid" id="product-cards"></div>
+        <div id="product-table" hidden>
+          <div class="tbl table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Produto</th>
+                  <th>Código</th>
+                  <th>Estoque</th>
+                  <th>Preço</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="product-rows"></tbody>
+            </table>
+            <p class="empty-row" id="empty-products"></p>
+          </div>
+        </div>
+        <div class="product-pagination" id="product-pagination"></div>
+      </section>
+    </template>
+    <template id="payables">
+      <section class="screen" data-screen="payables">
+        <div class="stats">
+          <article class="stat">
+            <small>
+              <i style="background: var(--blue)"> </i>Total em aberto</small
+            >
+            <b id="payable-pending">—</b>
+            <span id="payable-pending-caption"> </span>
+          </article>
+          <article class="stat">
+            <small> <i style="background: var(--red)"> </i>Vencidas</small>
+            <b id="payable-overdue">—</b>
+            <span id="payable-overdue-caption"> </span>
+          </article>
+          <article class="stat">
+            <small> <i style="background: var(--amber)"> </i>Vencem hoje</small>
+            <b id="payable-today">—</b>
+            <span id="payable-today-caption"> </span>
+          </article>
+          <article class="stat">
+            <small>
+              <i style="background: var(--green)"> </i>Pagas no mês</small
+            >
+            <b id="payable-paid-month">—</b>
+            <span id="payable-paid-month-caption"> </span>
+          </article>
+        </div>
+        <div class="toolbar">
+          <label class="search">
+            <i data-ic="search"> </i>
+            <input
+              id="payable-search"
+              placeholder="Buscar fornecedor, descrição ou linha digitável"
+              aria-label="Buscar fornecedor, descrição ou linha digitável"
+              autocomplete="off"
+            />
+          </label>
+          <div class="seg">
+            <button class="on" data-payable-view="list">Lista</button>
+            <button data-payable-view="calendar">Calendário</button>
+          </div>
+          <button class="btn primary" id="new-payable">
+            <i data-ic="upload"> </i>Importar boleto
+          </button>
+        </div>
+        <div class="chips" id="payable-chips"></div>
+        <div id="payable-calendar" hidden></div>
+        <div id="payable-table">
+          <div class="tbl table-scroll">
+            <table>
+              <thead>
+                <tr>
+                  <th>Vencimento</th>
+                  <th>Fornecedor / descrição</th>
+                  <th>Valor</th>
+                  <th>Status</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="payable-rows"></tbody>
+            </table>
+            <p class="empty-row" id="empty-payables"></p>
+          </div>
+        </div>
+      </section>
+    </template>
+    <template id="entries"
+      ><section class="screen" data-screen="entries">
+        <div class="stats" id="inbound-stats"></div>
+        <div class="toolbar inbound-toolbar">
+          <div class="seg">
+            <button class="on" data-inbound-tab="entries">
+              Notas de entrada</button
+            ><button data-inbound-tab="orders">Pedidos de entrada</button>
+          </div>
+          <button class="btn" id="manage-suppliers">
+            <i data-ic="users"></i>Fornecedores</button
+          ><button class="btn primary" id="new-inbound">
+            <i data-ic="plus"></i>Nova entrada
+          </button>
+        </div>
+        <div class="toolbar">
+          <label class="search"
+            ><i data-ic="search"></i
+            ><input
+              id="inbound-search"
+              placeholder="Buscar número, fornecedor, CPF/CNPJ ou documento"
+              aria-label="Buscar entradas" /></label
+          ><select
+            class="sel"
+            id="inbound-status"
+            aria-label="Situação"
+          ></select>
+        </div>
+        <div id="inbound-content"></div></section
+    ></template>
+    <dialog id="inbound-choice">
+      <div class="dialog-head">
+        <div>
+          <span class="eyebrow">GESTÃO COMERCIAL</span>
+          <h2>Nova entrada</h2>
+        </div>
+        <button class="x" type="button" data-inbound-close aria-label="Fechar">
+          ×
+        </button>
+      </div>
+      <p class="note">
+        Escolha como registrar os produtos recebidos ou preparar uma compra.
+      </p>
+      <div class="inbound-choices">
+        <label class="inbound-choice-file"
+          ><i data-ic="upload"></i><b>Importar XML da NF-e</b
+          ><small>Modelo 55 · conferência de fornecedor e produtos</small
+          ><input
+            id="inbound-xml-file"
+            type="file"
+            accept=".xml,application/xml,text/xml" /></label
+        ><button class="sc" data-inbound-new="manual">
+          <i data-ic="box"></i
+          ><span
+            ><b>Entrada manual</b
+            ><small>Registrar recebimento com ou sem nota</small></span
+          ></button
+        ><button class="sc" data-inbound-new="order">
+          <i data-ic="file"></i
+          ><span
+            ><b>Novo pedido de entrada</b
+            ><small>Planejar e receber compras por etapas</small></span
+          >
+        </button>
+      </div>
+    </dialog>
+    <dialog id="inbound-editor" class="inbound-wide">
+      <div class="dialog-head">
+        <div>
+          <span class="eyebrow">CONFERÊNCIA E CADASTRO</span>
+          <h2 id="inbound-editor-title">Nova entrada</h2>
+        </div>
+        <button class="x" type="button" data-inbound-close aria-label="Fechar">
+          ×
+        </button>
+      </div>
+      <div id="inbound-editor-body"></div>
+      <div class="dialog-actions inbound-editor-actions">
+        <button type="button" class="btn" id="inbound-save-draft">
+          Salvar rascunho</button
+        ><button type="button" class="btn primary" id="inbound-save-confirm">
+          Confirmar entrada
+        </button>
+      </div>
+    </dialog>
+    <dialog id="inbound-supplier-dialog">
+      <div class="dialog-head">
+        <div>
+          <span class="eyebrow">CADASTRO</span>
+          <h2>Fornecedores</h2>
+        </div>
+        <button class="x" type="button" data-inbound-close aria-label="Fechar">
+          ×
+        </button>
+      </div>
+      <div id="supplier-dialog-body"></div>
+    </dialog>
+    <dialog id="inbound-quick-product">
+      <div class="dialog-head">
+        <div>
+          <span class="eyebrow">CATÁLOGO</span>
+          <h2>Cadastro rápido de produto</h2>
+        </div>
+        <button class="x" type="button" data-inbound-close aria-label="Fechar">
+          ×
+        </button>
+      </div>
+      <div id="inbound-quick-product-body"></div>
+    </dialog>
+    <dialog id="inbound-detail" class="inbound-wide">
+      <div class="dialog-head">
+        <div>
+          <span class="eyebrow">DETALHES DO REGISTRO</span>
+          <h2 id="inbound-detail-title">Entrada</h2>
+        </div>
+        <button class="x" type="button" data-inbound-close aria-label="Fechar">
+          ×
+        </button>
+      </div>
+      <div id="inbound-detail-body"></div>
+      <div class="dialog-actions" id="inbound-detail-actions"></div>
+    </dialog>
+    <template id="sale">
+      <section class="pdv open">
+        <header class="p-top">
+          <button type="button" class="p-back" data-go="dashboard">
+            ← Início
+          </button>
+          <span class="brand-icon"><img src="./favicon.svg" alt="Empresa Demonstração" width="64" height="64" /></span>
+          <div class="p-title">
+            Nova venda<small>Venda de balcão</small>
+          </div>
+          <div class="p-right">
+            <div class="clock">
+              <div class="time js-time"></div>
+              <div class="date js-date"></div>
+            </div>
+            <span class="p-online"> <i> </i> Online</span>
+          </div>
+        </header>
+        <div class="p-work">
+          <section class="p-cat">
+            <div class="p-searchwrap">
+              <label class="p-search">
+                <i data-ic="search"></i>
+                <input
+                  id="sale-search"
+                  autocomplete="off"
+                  placeholder="Leia o código de barras ou digite o nome do produto"
+                />
+                <kbd>F2</kbd>
+                <button type="button" class="scan-barcode" id="scan-barcode">
+                  ⌁
+                </button>
+              </label>
+              <div id="suggestions" class="p-sug"></div>
+            </div>
+            <p class="p-tip">
+              Dica: pesquise pelo <b>nome, código ou categoria</b>. Pressione
+              Enter para adicionar o primeiro produto.
+            </p>
+            <div class="p-lhead">
+              <h2>Itens da venda</h2>
+              <span class="count" id="cart-count-badge">0</span>
+              <button type="button" class="lnk-red" id="cart-clear" disabled>
+                Limpar venda
+              </button>
+            </div>
+            <div id="cart" class="p-lines cart empty"></div>
+          </section>
+          <aside class="p-cart">
+            <div class="pk-head">
+              <div>
+                <h2>Pagamento</h2>
+                <small id="cart-count">Nenhum item</small>
+              </div>
+                <button
+                  type="button"
+                  class="x pk-close"
+                  id="close-payment"
+                  aria-label="Voltar aos itens"
+                >
+                  ×
+                </button>
+            </div>
+            <div class="pk-foot">
+              <div class="totbox">
+                <div class="tl">
+                  <span>Subtotal</span>
+                  <b id="sale-subtotal">R$ 0,00</b>
+                </div>
+                <div id="sale-discount-row" class="tl d" hidden>
+                  <span>Desconto</span>
+                  <b id="sale-discount-value">− R$ 0,00</b>
+                </div>
+                <div id="sale-delivery-row" class="tl" hidden>
+                  <span>Taxa de entrega</span>
+                  <b id="sale-delivery-value">+ R$ 0,00</b>
+                </div>
+                <div class="total">
+                  <span>Total</span>
+                  <b id="sale-total">R$ 0,00</b>
+                </div>
+              </div>
+              <section id="credit-client" class="credit-client">
+                <label><input type="checkbox" id="historical-sale" /> Esta compra aconteceu antes de hoje</label>
+                <label id="historical-sale-field" hidden>Data original da compra<input class="in" id="historical-sale-date" type="date" /><small>Será registrada a prazo nesta data, sem entrar nas vendas de hoje.</small></label>
+                <span>Cliente para a notinha ou venda a prazo</span>
+                <input
+                  id="sale-client-search"
+                  class="in"
+                  autocomplete="off"
+                  placeholder="Nome, telefone, CPF ou CNPJ"
+                />
+                <div id="client-suggestions" class="client-suggestions"></div>
+                <p id="selected-client" class="selected-client" hidden></p>
+                <label class="withdrawn-label"
+                  >Quem retirou os produtos?<input
+                    id="withdrawn-by"
+                    autocomplete="name"
+                    placeholder="Nome de quem retirou"
+                  />
+                </label>
+                <button type="button" class="secondary" id="quick-client">
+                  + Cadastrar cliente
+                </button>
+              </section>
+              <div class="disc-row">
+                <label
+                  >Desconto (R$)<input
+                    id="discount-input"
+                    inputmode="decimal"
+                    placeholder="0,00"
+                  />
+                </label>
+              </div>
+              <label class="delivery-field"
+                >Taxa de entrega (R$)<input
+                  id="delivery-fee"
+                  inputmode="decimal"
+                  placeholder="0,00"
+                />
+              </label>
+              <span class="pay-label">Forma de pagamento</span>
+              <div class="pay-grid" id="payment-options">
+                <button type="button" class="pay on" data-payment="pix">
+                  <i data-ic="pix"></i>Pix
+                </button>
+                <button type="button" class="pay" data-payment="dinheiro">
+                  <i data-ic="money"></i>Dinheiro
+                </button>
+                <button type="button" class="pay" data-payment="debito">
+                  <i data-ic="card"></i>Débito
+                </button>
+                <button type="button" class="pay" data-payment="credito">
+                  <i data-ic="card2"></i>Crédito
+                </button>
+                <button type="button" class="pay" data-payment="fiado">
+                  <i data-ic="user"></i>A prazo
+                </button>
+              </div>
+              <select
+                id="payment"
+                class="payment-native"
+                aria-label="Forma de pagamento"
+              >
+                <option value="pix">Pix</option>
+                <option value="dinheiro">Dinheiro</option>
+                <option value="debito">Débito</option>
+                <option value="credito">Crédito</option>
+                <option value="fiado">Venda a prazo</option>
+              </select>
+              <section id="change-panel" class="cash" hidden>
+                <div class="cash-row">
+                  <label
+                    >Valor recebido<input
+                      id="cash-received"
+                      inputmode="decimal"
+                      placeholder="0,00"
+                    />
+                  </label>
+                </div>
+                <div class="troco">
+                  <span>Troco</span>
+                  <b id="change-value">R$ 0,00</b>
+                </div>
+                <small id="cash-shortage"> </small>
+              </section>
+            </div>
+            <div class="pk-bottom">
+              <button class="finalize finish-sale" id="finish-sale">
+                ✓ Finalizar venda
+              </button>
+              <p class="hint">F2 buscar · Use a câmera para código de barras</p>
+            </div>
+          </aside>
+        </div>
+        <div class="p-mbar">
+          <div class="sum">
+            <small id="mobile-cart-count">Nenhum item</small>
+            <b id="mobile-sale-total">R$ 0,00</b>
+          </div>
+          <button id="open-payment" disabled>Pagar ↑</button>
+        </div>
+      </section>
+    </template>
+    <dialog id="sale-details-dialog" class="sale-details-dialog">
+      <form method="dialog">
+        <div class="dialog-head">
+          <div>
+            <span class="eyebrow">DETALHES DA OPERAÇÃO</span>
+            <h2 id="sale-details-title">Venda</h2>
+          </div>
+          <button type="submit" formnovalidate aria-label="Fechar">×</button>
+        </div>
+        <div id="sale-details-content"></div>
+        <div class="dialog-actions detail-actions">
+          <button type="button" class="btn" id="detail-print-receipt">
+            Recibo térmico
+          </button>
+          <button type="button" class="btn" id="detail-print-order">
+            Pedido PDF
+          </button>
+          <button type="button" class="btn" id="detail-edit-sale">
+            Editar pagamento
+          </button>
+          <button type="button" class="btn danger" id="detail-cancel-sale">
+            Cancelar venda
+          </button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="sale-edit-dialog">
+      <form method="dialog">
+        <div class="dialog-head">
+          <h2>Editar venda</h2>
+          <button type="submit" formnovalidate aria-label="Fechar">×</button>
+        </div>
+        <p class="text" id="sale-edit-title"></p>
+        <div class="form-grid">
+          <label class="wide"
+            >Forma de pagamento<select class="in" id="sale-edit-payment">
+              <option value="pix">Pix</option>
+              <option value="dinheiro">Dinheiro</option>
+              <option value="debito">Débito</option>
+              <option value="credito">Crédito</option>
+              <option value="fiado">A prazo</option>
+            </select>
+          </label>
+        </div>
+        <div class="dialog-actions">
+          <button class="btn" type="submit" formnovalidate>Cancelar</button>
+          <button class="btn primary" id="save-sale-edit" value="default">
+            Salvar alteração
+          </button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="client-dialog">
+      <form method="dialog">
+        <div class="dialog-head">
+          <h2>Novo cliente</h2>
+          <button type="submit" formnovalidate aria-label="Fechar">×</button>
+        </div>
+        <div class="form-grid">
+          <label class="wide"
+            >Nome<input class="in" id="c-name" required />
+          </label>
+          <label
+            >Telefone<input class="in" id="c-phone" inputmode="tel" />
+          </label>
+          <label
+            >CPF ou CNPJ<input class="in" id="c-document" inputmode="numeric" />
+          </label>
+          <label class="wide"
+            >Endereço (opcional)<input
+              class="in"
+              id="c-address"
+              autocomplete="street-address"
+            />
+          </label>
+        </div>
+        <p id="client-status" class="form-status" aria-live="polite"></p>
+        <div class="dialog-actions">
+          <button class="btn" type="submit" formnovalidate>Cancelar</button>
+          <button class="btn primary" id="save-client" value="default">
+            Salvar cliente
+          </button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="payable-dialog">
+      <form method="dialog">
+        <div class="dialog-head">
+          <h2>Importar boleto</h2>
+          <button type="submit" formnovalidate aria-label="Fechar">×</button>
+        </div>
+        <p class="text">
+          Envie o PDF para preencher os campos automaticamente. Confira os dados
+          antes de salvar.
+        </p>
+        <label class="file-field"
+          >Arquivo PDF<input
+            class="in"
+            id="boleto-file"
+            type="file"
+            accept="application/pdf"
+          />
+          <span id="boleto-file-name">Selecionar boleto em PDF</span>
+        </label>
+        <div class="form-grid">
+          <label class="wide"
+            >Fornecedor / beneficiário<input
+              class="in"
+              id="p-supplier"
+              placeholder="Nome do fornecedor"
+            />
+          </label>
+          <label class="wide"
+            >Descrição<input
+              class="in"
+              id="p-description"
+              value="Boleto importado"
+            />
+          </label>
+          <label class="wide"
+            >Linha digitável<input
+              class="in"
+              id="p-line"
+              inputmode="numeric"
+              placeholder="Código de barras ou linha digitável"
+            />
+          </label>
+          <label
+            >Valor (R$)<input
+              class="in"
+              id="p-value"
+              type="number"
+              min="0.01"
+              step="0.01"
+              required
+            />
+          </label>
+          <label>Vencimento<input class="in" id="p-due" type="date" /> </label>
+        </div>
+        <p class="print-note" id="pdf-status"></p>
+        <div id="installments-preview" class="installments-preview"></div>
+        <div class="dialog-actions">
+          <button class="btn" id="add-installment" type="button">
+            + Adicionar parcela
+          </button>
+          <button class="btn" type="submit" formnovalidate>Cancelar</button>
+          <button
+            class="btn primary"
+            id="save-payable"
+            formnovalidate
+            value="default"
+          >
+            Cadastrar conta(s)
+          </button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="settlement-dialog">
+      <form method="dialog">
+        <div class="dialog-head">
+          <h2>Baixar conta</h2>
+          <button type="submit" formnovalidate aria-label="Fechar">×</button>
+        </div>
+        <p class="text" id="settlement-title"></p>
+        <div class="form-grid">
+          <label
+            >Banco / pagamento<select class="in" id="s-bank">
+              <option value="">Selecionar</option>
+              <option>Caixa</option>
+              <option>Banco do Brasil</option>
+              <option>Bradesco</option>
+              <option>Itaú</option>
+              <option>Santander</option>
+              <option>Inter</option>
+              <option>Nubank</option>
+              <option>Pix</option>
+              <option>Dinheiro</option>
+              <option>Outro</option>
+            </select>
+          </label>
+          <label
+            >Valor pago (R$)<input
+              class="in"
+              id="s-value"
+              type="number"
+              min="0.01"
+              step="0.01"
+              required
+            />
+          </label>
+          <label
+            >Data de pagamento<input
+              class="in"
+              id="s-date"
+              type="date"
+              required
+            />
+          </label>
+          <label
+            >Observação<input class="in" id="s-note" placeholder="Opcional" />
+          </label>
+        </div>
+        <div class="dialog-actions">
+          <button class="btn" type="submit" formnovalidate>Cancelar</button>
+          <button class="btn primary" id="save-settlement" value="default">
+            Confirmar baixa
+          </button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="product-dialog">
+      <form method="dialog">
+        <div class="dialog-head">
+          <h2 id="dialog-title">Novo produto</h2>
+          <button type="submit" formnovalidate aria-label="Fechar">×</button>
+        </div>
+        <div class="form-grid">
+          <label
+            >Código<input
+              class="in"
+              id="f-code"
+              inputmode="numeric"
+              title="Gerado automaticamente; você pode ajustar se necessário"
+            />
+          </label>
+          <label>Unidade<input class="in" id="f-unit" value="UN" /> </label>
+          <label class="wide"
+            >Descrição<input class="in" id="f-description" required />
+          </label>
+          <label
+            >Preço<input
+              class="in"
+              id="f-price"
+              type="number"
+              min="0"
+              step="0.01"
+              required
+            />
+          </label>
+          <label
+            >Estoque<input
+              class="in"
+              id="f-stock"
+              type="number"
+              min="0"
+              step="0.01"
+              value="0"
+            />
+          </label>
+          <label>Categoria<input class="in" id="f-category" /> </label>
+          <label
+            >Situação<select class="in" id="f-status">
+              <option>Ativo</option>
+              <option>Inativo</option>
+            </select>
+          </label>
+        </div>
+        <div class="dialog-actions">
+          <button class="btn" type="submit" formnovalidate>Cancelar</button>
+          <button class="btn primary" id="save-product" value="default">
+            Salvar
+          </button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="barcode-dialog" class="barcode-dialog">
+      <form method="dialog">
+        <div class="dialog-head">
+          <div>
+            <span class="eyebrow">LEITOR DE CÓDIGO</span>
+            <h2>Escanear produto</h2>
+          </div>
+          <button type="submit" formnovalidate aria-label="Fechar">×</button>
+        </div>
+        <div class="barcode-frame">
+          <video id="barcode-video" playsinline muted></video>
+          <span class="scan-line"> </span>
+        </div>
+        <p id="barcode-status" class="form-status">Preparando câmera…</p>
+        <div class="dialog-actions">
+          <button class="btn" type="submit" formnovalidate>
+            Fechar câmera
+          </button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="quick-price-dialog">
+      <form method="dialog">
+        <div class="dialog-head">
+          <div>
+            <span class="eyebrow">ALTERAÇÃO RÁPIDA</span>
+            <h2>Atualizar preço</h2>
+          </div>
+          <button type="submit" formnovalidate aria-label="Fechar">×</button>
+        </div>
+        <p class="text" id="quick-price-name"></p>
+        <label class="wide"
+          >Novo preço (R$)<input
+            class="in"
+            id="quick-price"
+            inputmode="decimal"
+            required
+          />
+        </label>
+        <p id="quick-price-status" class="form-status" aria-live="polite"></p>
+        <div class="dialog-actions">
+          <button class="btn" type="submit" formnovalidate>Cancelar</button>
+          <button class="btn primary" id="save-quick-price" value="default">
+            Atualizar preço
+          </button>
+        </div>
+      </form>
+    </dialog>
+    <dialog id="receipt-dialog">
+      <form method="dialog" class="receipt-choice">
+        <h2>Venda concluída</h2>
+        <p id="receipt-message"></p>
+        <button class="btn primary" id="print-receipt" value="default">
+          Imprimir recibo térmico
+        </button>
+        <button class="btn" id="print-order" value="default">
+          Abrir pedido completo
+        </button>
+        <button class="btn" id="send-whatsapp" value="default" hidden>
+          Enviar notinha no WhatsApp
+        </button>
+        <button class="link">Fechar</button>
+      </form>
+    </dialog>
+    <dialog id="command-dialog">
+      <form method="dialog">
+        <div class="dialog-head">
+          <h2>Buscar ação</h2>
+          <button class="x" aria-label="Fechar">×</button>
+        </div>
+        <label class="search">
+          <i data-ic="search"> </i>
+          <input
+            id="command-search"
+            placeholder="Digite uma tela ou ação"
+            autocomplete="off"
+          />
+        </label>
+        <div id="command-list" class="pal-list"></div>
+      </form>
+    </dialog>
+
+
+
+
+    <dialog id="historical-credit-dialog"><form class="dialog-form"><div class="dialog-head"><h2>Lançar fiado antigo</h2><button type="button" id="close-historical-credit" class="x" aria-label="Fechar">×</button></div><p>Transfira uma anotação do papel para a conta do cliente. Informe apenas o valor que ainda falta pagar. Não lança produtos nem movimenta estoque.</p><div class="form-grid"><label class="fg wide">Cliente<select class="in" id="historical-client" required></select></label><label class="fg">Data original da compra<input class="in" id="historical-date" type="date" required /></label><label class="fg">Valor ainda devido (R$)<input class="in" id="historical-value" type="number" min="0.01" step="0.01" required /></label><label class="fg wide">Anotação<input class="in" id="historical-note" maxlength="300" placeholder="Ex.: compra anotada no caderno" /></label></div><p>O lançamento aparecerá no histórico na data informada e aumentará o saldo devedor atual. Confira se já não foi cadastrado.</p><button class="btn" id="save-historical-credit" type="submit">Registrar na conta do cliente</button></form></dialog>
+
+
+
+  <template id="reports">
+      <section class="screen" data-screen="sales">
+        <div class="toolbar">
+          <label class="search">
+            <i data-ic="search"> </i>
+            <input
+              id="sales-search"
+              placeholder="Buscar por número ou cliente"
+              aria-label="Buscar por número ou cliente"
+              autocomplete="off"
+            />
+          </label>
+          <select class="sel" id="sales-period" aria-label="Período">
+            <option value="7">Últimos 7 dias</option>
+            <option value="1">Hoje</option>
+            <option value="30">Últimos 30 dias</option>
+            <option value="0">Todo o período</option>
+          </select>
+          <select class="sel" id="sales-status" aria-label="Status">
+            <option value="">Todos os status</option>
+            <option>CONCLUIDA</option>
+            <option>CANCELADA</option>
+          </select>
+          <button class="btn" id="print-sales-report">Relatório PDF</button
+          ><button class="btn" id="export-sales">
+            <i data-ic="file"> </i>Exportar CSV
+          </button>
+        </div>
+        <div class="chips" id="sales-chips"></div>
+        <div class="stats" id="sales-stats"></div>
+        <article class="card">
+          <header class="card-h">
+            <h3>Vendas por dia</h3>
+            <span id="sales-chart-caption"> </span>
+          </header>
+          <div class="card-b">
+            <div class="bars sm" id="sales-chart"></div>
+          </div>
+        </article>
+        <div class="tbl table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Nº</th>
+                <th>Data</th>
+                <th>Cliente</th>
+                <th>Pagamento</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="sales-rows"></tbody>
+          </table>
+          <p class="empty-row" id="empty-sales"></p>
+        </div>
+      </section>
+    </template><dialog id="demo-dialog"><div class="dialog-head"><h2>Demonstração visual</h2><button id="demo-close" aria-label="Fechar">×</button></div><p>Esta é uma demonstração visual. Nenhum dado real é salvo, enviado, importado ou impresso.</p><button class="btn" id="demo-ok">Entendi</button></dialog><script src="./demo-data.js"></script><script src="./icons.js"></script><script src="./entradas-demo.js"></script><script src="./demo.js"></script><script src="./demo-safety.js"></script></body>
+</html>

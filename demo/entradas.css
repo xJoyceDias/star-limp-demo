@@ -1,0 +1,274 @@
+/* Entradas shares the V4 typography, tokens, cards, table and native dialog system. */
+.inbound-toolbar {
+  justify-content: space-between;
+}
+.inbound-toolbar .seg {
+  margin-right: auto;
+}
+.inbound-wide {
+  width: min(1080px, calc(100% - 32px));
+  max-height: 94dvh;
+}
+.inbound-wide > .dialog-head {
+  position: sticky;
+  top: -22px;
+  background: #0c1429;
+  z-index: 4;
+  padding: 14px 0;
+  margin-bottom: 14px;
+}
+.inbound-wide .card {
+  margin-bottom: 16px;
+}
+.inbound-wide .card-b {
+  padding: 20px;
+}
+.supplier-picker {
+  display: grid;
+  grid-template-columns: minmax(160px, 0.8fr) minmax(200px, 1.2fr) auto;
+  align-items: center;
+  gap: 10px;
+}
+.supplier-matches {
+  display: grid;
+  max-height: 180px;
+  overflow: auto;
+  margin: 12px 0;
+}
+.supplier-matches small {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+.inbound-choices {
+  display: grid;
+  gap: 14px;
+}
+.inbound-choices .sc {
+  width: 100%;
+  text-align: left;
+  gap: 16px;
+  padding: 22px;
+}
+.inbound-choices .sc small {
+  display: block;
+}
+.inbound-choice-file {
+  display: grid;
+  gap: 10px;
+  background: rgba(46, 155, 255, 0.08);
+  border: 1px dashed var(--blue);
+  border-radius: 20px;
+  padding: 22px;
+  color: var(--txt);
+  cursor: pointer;
+}
+.inbound-choice-file small {
+  color: var(--muted);
+}
+.inbound-choice-file input {
+  max-width: 100%;
+  font-size: 13px;
+}
+.inbound-item-list {
+  display: grid;
+  gap: 14px;
+}
+.inbound-line {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 18px;
+}
+.inbound-line > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.inbound-line header b {
+  font-size: 14px;
+}
+.inbound-line .form-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.inbound-line .fg.wide {
+  grid-column: 1/-1;
+}
+.inbound-line-total,
+.inbound-total {
+  display: grid;
+  gap: 8px;
+  align-content: center;
+  border-radius: 14px;
+  background: #2e9bff12;
+  padding: 12px;
+  color: var(--txt);
+}
+.inbound-line-total small,
+.inbound-total small {
+  font-size: 12px;
+  color: var(--muted);
+}
+.inbound-total strong {
+  font:
+    700 28px "Bricolage Grotesque",
+    sans-serif;
+}
+.inbound-check {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px !important;
+  color: var(--txt) !important;
+}
+.inbound-check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--blue);
+}
+.inbound-wide textarea,
+.inbound-supplier-dialog textarea {
+  height: 80px;
+  padding: 10px 14px;
+  resize: vertical;
+}
+.inbound-editor-actions {
+  position: sticky;
+  bottom: -22px;
+  background: #0c1429;
+  padding: 16px 0 12px;
+  border-top: 1px solid var(--line);
+  z-index: 4;
+}
+.inbound-editor-actions .btn {
+  flex: initial;
+  min-width: 180px;
+}
+.inbound-summary {
+  margin: 18px 0 12px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  display: grid;
+  gap: 8px;
+}
+.inbound-summary > div {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 14px;
+}
+.inbound-summary .total {
+  border-top: 1px dashed var(--line);
+  padding-top: 10px;
+  color: var(--txt);
+  font-size: 20px;
+}
+.inbound-summary .total strong {
+  font: 700 30px "Bricolage Grotesque";
+}
+.inbound-key {
+  overflow-wrap: anywhere;
+}
+.inbound-wide .card,
+.inbound-wide .form-grid > * {
+  min-width: 0;
+}
+#supplier-note {
+  height: 80px;
+  padding: 12px;
+}
+#inbound-editor-body > .alert {
+  margin-bottom: 16px;
+}
+@media (max-width: 760px) {
+  .supplier-picker {
+    grid-template-columns: 1fr;
+  }
+  .inbound-line .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .inbound-wide {
+    width: calc(100% - 16px);
+  }
+  .inbound-wide .card-b {
+    padding: 14px;
+  }
+  .inbound-line {
+    padding: 14px;
+  }
+  .inbound-toolbar > .seg {
+    width: 100%;
+    justify-content: center;
+  }
+  .inbound-toolbar > .seg button {
+    flex: 1;
+  }
+  .inbound-toolbar > .btn {
+    flex: 1;
+  }
+  .inbound-editor-actions .btn {
+    min-width: 0;
+    flex: 1;
+  }
+  .inbound-wide > .dialog-head h2 {
+    font-size: 19px;
+  }
+  .inbound-line header {
+    align-items: flex-start;
+  }
+  .inbound-line header b {
+    overflow-wrap: anywhere;
+  }
+  .inbound-wide .table-scroll table {
+    min-width: 660px;
+  }
+}
+.inbound-mobile-list {
+  display: none;
+}
+.form-grid .inbound-check {
+  display: flex;
+}
+#inbound-detail .mi-m small {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 3px;
+}
+@media (max-width: 1023px) {
+  .tabs {
+    flex-wrap: nowrap;
+  }
+  .tabs .tab {
+    flex: 0 0 68px;
+  }
+}
+@media (max-width: 760px) {
+  .inbound-desktop-list {
+    display: none;
+  }
+  .inbound-mobile-list {
+    display: block;
+  }
+  .inbound-mobile-list .tr {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .inbound-mobile-list .c-main {
+    min-width: 0;
+  }
+  .inbound-mobile-actions {
+    grid-column: 1/-1;
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+  .inbound-mobile-list .c-main b {
+    font-size: 13px;
+  }
+  .inbound-mobile-list .money {
+    font-size: 14px;
+  }
+}
